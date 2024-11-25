@@ -84,25 +84,7 @@ using (var scope = app.Services.CreateScope())
         StartDate = DateTime.Now,
         EndDate = DateTime.Now.AddMonths(3)
     });
-    context.Courses.Add(new Course
-    {
-        Id = 1,
-        CourseName = "Mathematics 101",
-        Capacity = 30,
-        AvailableSlots = 30,
-        StartDate = DateTime.Now,
-        EndDate = DateTime.Now.AddMonths(3)
-    });
 
-    context.Courses.Add(new Course
-    {
-        Id = 2,
-        CourseName = "Physics 101",
-        Capacity = 25,
-        AvailableSlots = 25,
-        StartDate = DateTime.Now,
-        EndDate = DateTime.Now.AddMonths(3)
-    });
 
     context.Courses.Add(new Course
     {
