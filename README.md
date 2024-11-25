@@ -58,14 +58,19 @@ To get started, you will need:
 
   
 ## FAQ
+
 Q: Can I modify the provided models or repositories?
+
 A: No, the models and repositories should remain unchanged. Your implementation must work with the existing setup.
 
 Q: Can I add extra helper methods?
+
 A: Yes, you may add helper methods within the ReservationService class if needed, as long as they are relevant and improve code clarity.
 
 Q: What should I do if I can't complete the task?
+
 A: Submit your progress and include a note explaining your thought process and any challenges faced.
+
 
 
 ### Running the Application
