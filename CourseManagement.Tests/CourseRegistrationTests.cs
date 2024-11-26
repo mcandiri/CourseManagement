@@ -17,13 +17,15 @@ namespace CourseManagement.Tests
         {
             // Setting up an in-memory database for testing purposes
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
-                .Options;
+       .UseInMemoryDatabase(Guid.NewGuid().ToString()) 
+       .Options;
 
             _context = new AppDbContext(options);
             var courseRepository = new CourseRepository(_context);
             var studentRepository = new StudentRepository(_context);
-            _reservationService = new ReservationService(courseRepository, studentRepository);
+            var studentCourseRepository = new StudentCourseRepository(_context);
+
+            _reservationService = new ReservationService(courseRepository, studentRepository, studentCourseRepository);
 
             // Adding mock students and courses to the in-memory database
             // NOTE: Do not modify this mock data. It is used to ensure consistency in tests.
