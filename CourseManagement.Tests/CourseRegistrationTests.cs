@@ -140,5 +140,41 @@ namespace CourseManagement.Tests
             var studentCoursesCount = _context.StudentCourses.Count(sc => sc.StudentId == student.Id);
             Assert.Equal(3, studentCoursesCount); // Non-priority student should be able to enroll in up to three courses
         }
+
+        [Fact]
+        public async Task DeregisterStudentFromCourse_ShouldRemoveStudentAndUpdateAvailableSlots()
+        {
+            // Arrange
+            var studentId = 1;
+            var courseId = 1;
+
+            await _reservationService.RegisterStudentToCourseAsync(courseId, studentId);
+            var registeredStudentCourse = _context.StudentCourses.FirstOrDefault(sc => sc.StudentId == studentId && sc.CourseId == courseId);
+            Assert.NotNull(registeredStudentCourse); // Ensure the student is registered
+
+            // Act
+            var result = await _reservationService.DeregisterStudentFromCourseAsync(courseId, studentId);
+
+            // Assert
+            Assert.True(result); // Deregistration should succeed
+            var deregisteredStudentCourse = _context.StudentCourses.FirstOrDefault(sc => sc.StudentId == studentId && sc.CourseId == courseId);
+            Assert.Null(deregisteredStudentCourse); // Ensure the student is no longer registered
+            var course = await _context.Courses.FindAsync(courseId);
+            Assert.Equal(30, course.AvailableSlots); // Ensure the available slots have been updated
+        }
+
+        [Fact]
+        public async Task DeregisterStudentFromCourse_WhenStudentIsNotRegistered_ShouldReturnFalse()
+        {
+            // Arrange
+            var studentId = 1;
+            var courseId = 2; // Student is not registered in this course
+
+            // Act
+            var result = await _reservationService.DeregisterStudentFromCourseAsync(courseId, studentId);
+
+            // Assert
+            Assert.False(result); // Deregistration should fail
+        }
     }
 }
