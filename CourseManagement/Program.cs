@@ -12,8 +12,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("CourseManagementDatabase"));
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
-builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IStudentCourseRepository, StudentCourseRepository>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
