@@ -7,7 +7,7 @@ namespace CourseManagement.Repositories.Concrete
 {
     public class CourseRepository(AppDbContext context) : ICourseRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _context = context;
 
         public async Task AddAsync(Course course)
         {
