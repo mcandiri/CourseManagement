@@ -3,10 +3,11 @@ using CourseManagement.Services.Abstract;
 
 namespace CourseManagement.Services.Concrete
 {
-    public class ReservationService(ICourseRepository courseRepository, IStudentRepository studentRepository) : IReservationService
+    public class ReservationService(ICourseRepository courseRepository, IStudentRepository studentRepository, IStudentCourseRepository studentCourseRepository) : IReservationService
     {
         private readonly ICourseRepository _courseRepository = courseRepository;
         private readonly IStudentRepository _studentRepository = studentRepository;
+        private readonly IStudentCourseRepository _studentCourseRepository = studentCourseRepository;
 
         public async Task<bool> RegisterStudentToCourseAsync(int courseId, int studentId)
         {
