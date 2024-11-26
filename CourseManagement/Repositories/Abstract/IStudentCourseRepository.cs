@@ -6,5 +6,7 @@ namespace CourseManagement.Repositories.Abstract
     public interface IStudentCourseRepository 
     {
         Task<StudentCourse?> FindAsync(Expression<Func<StudentCourse, bool>> predicate);
+        Task AddAsync(StudentCourse studentCourse);
+        Task DeleteAsync(StudentCourse studentCourse);
     }
 }
