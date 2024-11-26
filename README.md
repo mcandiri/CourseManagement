@@ -43,7 +43,7 @@ The main objective of this project is to evaluate your skills in:
 
 ---
 
-### **Algorithm Challenges**
+## **Algorithm Challenges**
 The algorithm challenges are located in the `AlgorithmTasks` namespace. These challenges are independent of the main course management logic and are designed to test your ability to work with algorithms and collections.
 
 #### **Challenge 1: Longest Increasing Subarray**
@@ -94,6 +94,26 @@ Your submission will be evaluated based on the following criteria:
 - **Code Quality**: Your code should be clean, well-organized, and follow best practices.
 - **Problem-Solving**: How well you handle edge cases and the logical flow of your implementation.
 - **Commit History**: Meaningful commit messages and regular commits to show progression in your work.
+
+---
+
+## **Pull Request Submission**
+
+Once you have completed the project, follow these steps to submit your work:
+1. Fork this repository to your personal GitHub account.
+2. Create a new branch from `main`. Example:
+   ```bash
+   git checkout -b yourname/solution
+   ```
+3. Commit your changes regularly with clear and meaningful messages.
+4. Push your changes to your forked repository. Example:
+   ```bash
+   git push origin yourname/solution
+   ```
+5. Create a Pull Request (PR) from your forked repository to this main repository:
+   - Provide a descriptive title, e.g., `YourName - Course Management Solution`.
+   - Include a brief description of your solution and any challenges you faced.
+   - Optional: Suggest any improvements or additional features.
 
 ---
 
