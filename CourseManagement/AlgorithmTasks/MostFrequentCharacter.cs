@@ -21,8 +21,8 @@
         /// If the input string is null or empty, the function will return (default(char), 0).
         /// </remarks>
         public static (char character, int count) FindMostFrequentCharacter(string input)
-        {
-            if(string.IsNullOrEmpty(input))
+        { 
+            if(string.IsNullOrWhiteSpace(input))
             { 
                 return (default(char), 0);
             }
@@ -44,17 +44,16 @@
             char mostRepeatChar = default(char);
             int maxCount = 0;
 
-            foreach (var c in repetition)
+            foreach (var repeat in repetition)
             {
-                if (c.Value > maxCount || (c.Value == maxCount && c.Key < mostRepeatChar))
+                if (repeat.Value > maxCount || (repeat.Value == maxCount && repeat.Key < mostRepeatChar))
                 {
-                    mostRepeatChar = c.Key;
-                    maxCount = c.Value;
+                    mostRepeatChar = repeat.Key;
+                    maxCount = repeat.Value;
                 }
             }
-            return (mostRepeatChar, maxCount);
 
+            return (mostRepeatChar, maxCount);
         }
     }
-
 }

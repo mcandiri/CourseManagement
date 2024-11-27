@@ -42,6 +42,7 @@
                 {
                     currentLength++;
                 }
+
                 else
                 {
                     if (currentLength > length)
@@ -60,9 +61,8 @@
                 length = currentLength;
                 start = currentStart;
             }
+
             return numbers.GetRange(start, length);
-
         }
-
     }
 }
