@@ -26,12 +26,42 @@
         /// </note>
         public static List<int> FindLongestIncreasingSubarray(List<int> numbers)
         {
-            // TODO: Implement the logic to find the longest increasing subarray.
-            // - Use a loop to iterate through the list while keeping track of the current increasing subarray.
-            // - When the sequence breaks, compare the current subarray's length to the longest found so far.
-            // - If there are multiple subarrays with the same length, return any one of them.
-            // - At the end of the loop, return the longest subarray found.
-            return [];
+            if (numbers == null || numbers.Count == 0)
+            {
+                return new List<int>();
+            }
+
+            int start = 0;
+            int length = 0;
+            int currentStart = 0;
+            int currentLength = 1;
+
+            for (int i = 1; i < numbers.Count; i++)
+            {
+                if (numbers[i] > numbers[i - 1])
+                {
+                    currentLength++;
+                }
+                else
+                {
+                    if (currentLength > length)
+                    {
+                        length = currentLength;
+                        start = currentStart;
+                    }
+
+                    currentStart = i;
+                    currentLength = 1;
+                }
+            }
+
+            if (currentLength > length)
+            {
+                length = currentLength;
+                start = currentStart;
+            }
+            return numbers.GetRange(start, length);
+
         }
 
     }
