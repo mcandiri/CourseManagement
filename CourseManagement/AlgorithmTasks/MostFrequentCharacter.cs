@@ -21,13 +21,39 @@
         /// If the input string is null or empty, the function will return (default(char), 0).
         /// </remarks>
         public static (char character, int count) FindMostFrequentCharacter(string input)
-        {
-            // TODO: Implement logic to find the most frequent character.
-            // - Use a dictionary to count occurrences of each character.
-            // - Identify the character with the maximum frequency.
-            // - If there is a tie, choose the character that is alphabetically smallest.
-            return (default(char), 0);
+        { 
+            if(string.IsNullOrWhiteSpace(input))
+            { 
+                return (default(char), 0);
+            }
+
+            var repetition = new Dictionary<char, int>();
+
+            foreach (var character in input)
+            {
+                if(repetition.ContainsKey(character))
+                {
+                    repetition[character]++;
+                }
+                else
+                {
+                    repetition[character] = 1;
+                }
+            }
+
+            char mostRepeatChar = default(char);
+            int maxCount = 0;
+
+            foreach (var repeat in repetition)
+            {
+                if (repeat.Value > maxCount || (repeat.Value == maxCount && repeat.Key < mostRepeatChar))
+                {
+                    mostRepeatChar = repeat.Key;
+                    maxCount = repeat.Value;
+                }
+            }
+
+            return (mostRepeatChar, maxCount);
         }
     }
-
 }
