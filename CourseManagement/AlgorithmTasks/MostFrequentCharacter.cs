@@ -22,12 +22,33 @@
         /// </remarks>
         public static (char character, int count) FindMostFrequentCharacter(string input)
         {
-            // TODO: Implement logic to find the most frequent character.
-            // - Use a dictionary to count occurrences of each character.
-            // - Identify the character with the maximum frequency.
-            // - If there is a tie, choose the character that is alphabetically smallest.
-            return (default(char), 0);
-        }
-    }
+            // If input is null or empty, return a default value.
+            if (string.IsNullOrEmpty(input))
+            {
+                // If input is null or empty, return a default value.
+                return (default(char), 0);
+            }
 
+            //We separate the input value into chars.
+            List<char> charList = input.ToList();
+
+            //Here we could have done this job using a loop, but I wanted to solve the problem by grouping.
+            //Grouping and sorting is done with GroupBy.
+            var groupedResult = charList
+                .GroupBy(c => c) 
+                .Select(g => new { Char = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count) 
+                .ThenBy(x => x.Char)
+                .FirstOrDefault(); 
+
+            if (groupedResult != null)
+            {
+                return (groupedResult.Char, groupedResult.Count);
+            }
+
+            return (default(char), 0);
+
+        }
+
+    }
 }
