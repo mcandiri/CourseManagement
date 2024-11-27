@@ -31,7 +31,32 @@
             // - When the sequence breaks, compare the current subarray's length to the longest found so far.
             // - If there are multiple subarrays with the same length, return any one of them.
             // - At the end of the loop, return the longest subarray found.
-            return [];
+
+            if (numbers == null || numbers.Count == 0)
+                return new List<int>();  //Liste boş mu kontrolunu yaptım 
+
+            var longest = new List<int>();                  //ilerlemeyi kaydetmek ve sonuç döndürmek için longest listesini oluşturdum
+            var current = new List<int> { numbers[0] };    //ilerlemeyi takip edebilmek için current listesini oluşturdum
+
+            for (int i = 1; i<numbers.Count; i++)         //for ile verilen listedeki eleman sayısını baz alarak listeyi dolaştım
+            {
+                if (numbers[i] > numbers[i - 1])        //gelen sayı önceki sayıdan büyük ise ilerlemeyi takip ettiğim current listesine ekledim
+                {
+                    current.Add(numbers[i]);
+                }
+                else                                   //gelen sayı öncekiden sayıdan küçük ise
+                { 
+                    if(current.Count > longest.Count)                //current listesini longest listesine aktarıyorum 
+                        longest = new List<int> (current);
+                    current.Clear ();                               //current listesini temizliyorum 
+                    current.Add(numbers[i]);                       // current listesine kaldığım yerden ekleme yapmaya devam ediyorum
+                }
+            }
+
+            if (current.Count > longest.Count)                  //yeni listenin eski listeden uzun olup olmadıgını kıyaslıyorum
+                longest = current;                              //yeni liste daha uzunsa eski listenin üstündeki verileri yeni liste ile değiştiriyorum
+            
+            return longest;                         
         }
 
     }
