@@ -10,6 +10,12 @@ namespace CourseManagement.Services.Concrete
         private readonly IStudentRepository _studentRepository = studentRepository;
         private readonly IStudentCourseRepository _studentCourseRepository = studentCourseRepository;
 
+        /// <summary>
+        /// Adds the student to the selected course.
+        /// </summary>
+        /// <param name="courseId">Takes the course Id parameter.</param>
+        /// <param name="studentId">Takes the Student Id parameter.</param>
+        /// <returns></returns>
         public async Task<bool> RegisterStudentToCourseAsync(int courseId, int studentId)
         {
             //Information about the course you want to register for is obtained.
@@ -46,6 +52,12 @@ namespace CourseManagement.Services.Concrete
             return true; // Returning true as a placeholder
         }
 
+        /// <summary>
+        /// Deletes a student who has previously registered for a course from the course he/she is registered for.
+        /// </summary>
+        /// <param name="courseId">Takes the course Id parameter.</param>
+        /// <param name="studentId">Takes the Student Id parameter.</param>
+        /// <returns></returns>
         public async Task<bool> DeregisterStudentFromCourseAsync(int courseId, int studentId)
         {
             //Information about the course you want to register for is obtained.
