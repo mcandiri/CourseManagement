@@ -22,11 +22,36 @@
         /// </remarks>
         public static (char character, int count) FindMostFrequentCharacter(string input)
         {
-            // TODO: Implement logic to find the most frequent character.
-            // - Use a dictionary to count occurrences of each character.
-            // - Identify the character with the maximum frequency.
-            // - If there is a tie, choose the character that is alphabetically smallest.
-            return (default(char), 0);
+            /// Input: "mississippi"
+            char mostRepeatsCharacter = '\0';
+            int repeatCount = 0;
+
+            if (string.IsNullOrEmpty(input))
+                return ('\0', 0);
+
+            Dictionary<char, int> charactersAndRepeats = new Dictionary<char, int>();
+
+            foreach (var ch in input)
+            {
+                if (charactersAndRepeats.ContainsKey(ch))
+                {
+                    charactersAndRepeats[ch]++;
+                }
+                else
+                {
+                    charactersAndRepeats.Add(ch, 1);
+                }
+            }
+
+            foreach (var couples in charactersAndRepeats)
+            {
+                if (couples.Value > repeatCount || (couples.Value == repeatCount && couples.Key < mostRepeatsCharacter))
+                {
+                    mostRepeatsCharacter = couples.Key;
+                    repeatCount = couples.Value;
+                }
+            }
+            return (mostRepeatsCharacter, repeatCount);
         }
     }
 
