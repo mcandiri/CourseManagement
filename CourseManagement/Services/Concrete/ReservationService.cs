@@ -24,10 +24,16 @@ namespace CourseManagement.Services.Concrete
             var student = await _studentRepository.GetByIdAsync(studentId);
 
             var enrolledCoursesCount = await _studentCourseRepository.CountAsync(x => x.StudentId == studentId);
-           // StudentCourseRepository'e CountAsync metodu eklenerek öğrencinin daha önce kaydolduğu derslerin toplam sayısı alınıyor.
+            // StudentCourseRepository'e CountAsync metodu eklenerek öğrencinin daha önce kaydolduğu derslerin toplam sayısı alınıyor.
+
+            // Öğrencinin öncelikli olup olmadığını kontrol ediliyor.
+            bool isPriorityStudent = student.IsPriority;
+
+            // Öncelikli öğrenci değilse, öğrenci maksimum 3 derse kaydolabilir.
+            int maxCoursesAllowed = isPriorityStudent ? 5 : student.MaxCoursesAllowed;
 
             // Course'un boş kontenjanı varsa ve öğrencinin almış olduğu toplam kurs/ders sayısı bir öğrencinin alabileceği maksimum ders sayısından küçükse kayıt işlemi yapılıyor.
-            if (course.AvailableSlots > 0 && enrolledCoursesCount < student.MaxCoursesAllowed)
+            if (course.AvailableSlots > 0 && enrolledCoursesCount < maxCoursesAllowed)
             {
                 course.AvailableSlots--;  // derse yeni bir kayıt yapıldığı için kontenjan 1 azaltılır.
                 await _courseRepository.UpdateAsync(course);  // Course modelinde AvailableSlots sayısı değiştiği için Update ediliyor.
