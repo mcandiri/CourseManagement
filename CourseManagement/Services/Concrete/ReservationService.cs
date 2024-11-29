@@ -30,6 +30,15 @@ namespace CourseManagement.Services.Concrete
 			if (existingRegistration != null)
 				return false;
 
+			// 4. Yeni StudentCourse kaydı oluştur
+			var studentCourse = new StudentCourse
+			{
+				CourseId = courseId,
+				StudentId = studentId,
+				EnrollmentDate = DateTime.UtcNow
+			};
+
+			await _studentCourseRepository.AddAsync(studentCourse);
 
 			return true;
 		}
