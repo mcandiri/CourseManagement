@@ -8,5 +8,7 @@ namespace CourseManagement.Repositories.Abstract
         Task<StudentCourse?> FindAsync(Expression<Func<StudentCourse, bool>> predicate);
         Task AddAsync(StudentCourse studentCourse);
         Task DeleteAsync(StudentCourse studentCourse);
+
+        Task<int> CountAsync(Expression<Func<StudentCourse, bool>> predicate);
     }
 }

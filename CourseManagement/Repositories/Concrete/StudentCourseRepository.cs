@@ -26,5 +26,10 @@ namespace CourseManagement.Repositories.Concrete
             _context.Set<StudentCourse>().Remove(studentCourse);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<int> CountAsync(Expression<Func<StudentCourse, bool>> predicate)
+        {
+            return await _context.Set<StudentCourse>().CountAsync(predicate);  // Sayım işlemi yapılıyor.
+        }
     }
 }
