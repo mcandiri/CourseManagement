@@ -96,7 +96,6 @@ Your submission will be evaluated based on the following criteria:
 - **Commit History**: Meaningful commit messages and regular commits to show progression in your work.
 
 ---
-
 ## **Pull Request Submission**
 
 Once you have completed the project, follow these steps to submit your work:
