@@ -1,4 +1,5 @@
-﻿using CourseManagement.Repositories.Abstract;
+﻿using CourseManagement.Models;
+using CourseManagement.Repositories.Abstract;
 using CourseManagement.Services.Abstract;
 
 namespace CourseManagement.Services.Concrete
@@ -11,20 +12,41 @@ namespace CourseManagement.Services.Concrete
 
         public async Task<bool> RegisterStudentToCourseAsync(int courseId, int studentId)
         {
-            // TODO: Implement the logic to register a student to a course.
-            // 1. Check if the course capacity is available.
-            // 2. Check if the student has already registered for this course.
-            // 3. Update the available slots of the course.
-            // 4. Add the StudentCourse record.
-            return true; // Returning true as a placeholder
+            var course = await _courseRepository.GetByIdAsync(courseId);
+            if (course == null || course.AvailableSlots <= 0) return false;
+
+            var studentCourse = new StudentCourse
+            {
+                CourseId = courseId,
+                StudentId = studentId
+            };
+
+            await _studentCourseRepository.AddAsync(studentCourse);
+            course.AvailableSlots--;
+            await _courseRepository.UpdateAsync(course);
+
+            return true;
         }
 
         public async Task<bool> DeregisterStudentFromCourseAsync(int courseId, int studentId)
         {
-            // TODO: Implement the logic to deregister a student from a course.
-            // 1. Remove the StudentCourse record.
-            // 2. Update the available slots of the course.
-            return true; // Returning true as a placeholder
+         var studentCourse = await _studentCourseRepository.FindAsync(
+        sc => sc.CourseId == courseId && sc.StudentId == studentId);
+
+            if (studentCourse == null) return false; 
+
+                
+                await _studentCourseRepository.DeleteAsync(studentCourse);
+
+                var course = await _courseRepository.GetByIdAsync(courseId);
+                if (course != null)
+                {
+                    course.AvailableSlots++;
+                    await _courseRepository.UpdateAsync(course);
+                }
+
+                return true;
+
         }
     }
 }
