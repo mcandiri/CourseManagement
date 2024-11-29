@@ -40,6 +40,10 @@ namespace CourseManagement.Services.Concrete
 
 			await _studentCourseRepository.AddAsync(studentCourse);
 
+			// 5. Kurs kontenjanını güncelle
+			course.AvailableSlots--;
+			await _courseRepository.UpdateAsync(course);
+
 			return true;
 		}
 
