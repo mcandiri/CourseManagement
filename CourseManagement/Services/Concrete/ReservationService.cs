@@ -56,7 +56,14 @@ namespace CourseManagement.Services.Concrete
 			if (course == null || student == null)
 				return false;
 
-	
+			// 2. Öğrencinin bu kursa kayıtlı olup olmadığını kontrol et
+			var existingRegistration = await _studentCourseRepository.FindAsync(
+				sc => sc.CourseId == courseId && sc.StudentId == studentId);
+
+			if (existingRegistration == null)
+				return false;
+
+		
 
 			return true; // Returning true as a placeholder
         }
