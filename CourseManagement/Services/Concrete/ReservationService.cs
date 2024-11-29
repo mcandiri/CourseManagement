@@ -49,10 +49,16 @@ namespace CourseManagement.Services.Concrete
 
         public async Task<bool> DeregisterStudentFromCourseAsync(int courseId, int studentId)
         {
-            // TODO: Implement the logic to deregister a student from a course.
-            // 1. Remove the StudentCourse record.
-            // 2. Update the available slots of the course.
-            return true; // Returning true as a placeholder
+			// 1. Kursu ve öğrenciyi kontrol et
+			var course = await _courseRepository.GetByIdAsync(courseId);
+			var student = await _studentRepository.GetByIdAsync(studentId);
+
+			if (course == null || student == null)
+				return false;
+
+	
+
+			return true; // Returning true as a placeholder
         }
     }
 }
