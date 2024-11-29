@@ -63,7 +63,9 @@ namespace CourseManagement.Services.Concrete
 			if (existingRegistration == null)
 				return false;
 
-		
+			// 3. StudentCourse kaydını sil
+			await _studentCourseRepository.DeleteAsync(existingRegistration);
+
 
 			return true; // Returning true as a placeholder
         }
