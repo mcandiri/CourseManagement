@@ -23,6 +23,13 @@ namespace CourseManagement.Services.Concrete
 			if (course.AvailableSlots <= 0)
 				return false;
 
+			// 3. Öğrencinin daha önce bu kursa kayıtlı olup olmadığını kontrol et
+			var existingRegistration = await _studentCourseRepository.FindAsync(
+				sc => sc.CourseId == courseId && sc.StudentId == studentId);
+
+			if (existingRegistration != null)
+				return false;
+
 
 			return true;
 		}
