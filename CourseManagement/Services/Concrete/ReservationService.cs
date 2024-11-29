@@ -66,6 +66,9 @@ namespace CourseManagement.Services.Concrete
 			// 3. StudentCourse kaydını sil
 			await _studentCourseRepository.DeleteAsync(existingRegistration);
 
+			// 4. Kurs kontenjanını güncelle
+			course.AvailableSlots++;
+			await _courseRepository.UpdateAsync(course);
 
 			return true; // Returning true as a placeholder
         }
